@@ -1,0 +1,35 @@
+Model Context Protocol (MCP)
+
+What it is
+- MCP is an open protocol that standardizes how AI apps (clients) connect to external tools and data (servers).
+- The goal is to make tool/data integrations consistent, safer, and easier to reuse across different AI clients.
+
+Core ideas (high level)
+- Client: the AI application (chat app/IDE assistant) that wants to use tools or read resources.
+- Server: exposes capabilities to the client.
+  - Tools: actions with side effects (create issues, run commands, query services, etc.).
+  - Resources: read-only data (docs, files, database views, etc.).
+  - Prompts: reusable prompt templates/workflows (optional, depending on server).
+
+How it typically works
+- The client discovers what a server offers (available tools/resources).
+- The client calls tools by name with structured arguments (usually JSON).
+- The server executes the request and returns a structured result.
+
+Why it matters
+- Interoperability: one server can work with many AI clients.
+- Modularity: add/remove integrations without rewriting the AI app.
+- Safety: clearer boundaries between “read data” vs “perform actions”, plus explicit tool schemas.
+
+Common examples
+- GitHub server: create repos, open issues, read file contents.
+- Browser server: navigate, click, scrape page content.
+- Database server: run parameterized queries and return results.
+
+Security & best practices
+- Least privilege: give servers only the permissions they need.
+- Avoid secrets in repos: don’t commit tokens/keys; use environment variables or secret managers.
+- Validate inputs: servers should validate tool arguments and restrict dangerous operations.
+
+Repo purpose
+- This repository contains a short overview of MCP and can be expanded with examples, server/client setup notes, and sample tool schemas.
